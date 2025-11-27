@@ -1,0 +1,32 @@
+ name: Demo pipleline
+
+ on:
+    push:
+        branches:
+            - main
+            - dev
+    pull_request:
+        branches: [main, dev]
+    schedule:
+        - cron: "*/1 * * * *"
+
+ jobs:
+    setup_job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: creat file
+              run: touch github_action.txt
+            - name: print hellow world
+              run: echo hello world
+            - name: display readme file
+              run: cat README.md
+    build_job:
+        runs-on: windows-latest
+        steps:
+            - name: display hello
+              run: echo hello
+    deploy_job:
+        runs-on: macos-latest
+        steps:
+            - run: echo hello mac
+
