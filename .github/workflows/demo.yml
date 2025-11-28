@@ -7,8 +7,8 @@
             - dev
     pull_request:
         branches: [main, dev]
-    schedule:
-        - cron: "*/1 * * * *"
+    # schedule:
+    #     - cron: "*/1 * * * *"
 
  jobs:
     setup_job:
@@ -17,22 +17,23 @@
             - name: Checkout repo
               uses: actions/checkout@v4 
             - name: creat file
-              run: touch github_action.txt
+              run: |
+                touch github_action.txt
+                ls -la
             - name: print hellow world
               run: echo hello world
             - name: display readme file
               run: cat README.md
     build_job:
-        needs: 
-            - setup_job
-            - deploy_job
-
+        needs: setup_job
         runs-on: windows-latest
         steps:
             - name: display hello
               run: echo hello
+            - name: Display github-action.txt
+              run: cat githun-aactiiom.txt
     deploy_job:
-        needs: setup_job
+        needs: build_job
         runs-on: macos-latest
         steps:
             - run: echo hello mac
