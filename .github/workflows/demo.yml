@@ -26,7 +26,7 @@
             - name: display readme file
               run: cat README.md
             - name: upload my artifact
-              uses: action/upload-artifact@v4
+              uses: actions/upload-artifact@v4
               with:
                 name: my-file
                 path: github-action.txt
@@ -36,7 +36,7 @@
         steps:
             - name: display hello
               run: echo hello
-            - uses: action/download-artifact@v4
+            - uses: actions/download-artifact@v4
               with:
                 path: github-action.txt  
             - name: Display github-action.txt
