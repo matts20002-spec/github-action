@@ -19,17 +19,26 @@
             - name: creat file
               run: |
                 touch github_action.txt
+                echo "from first job" > github-actioon.txt
                 ls -la
             - name: print hellow world
               run: echo hello world
             - name: display readme file
               run: cat README.md
+            - name: upload my artifact
+              uses: action/upload-artifact@v4
+              with:
+                name: my-file
+                path: github-action.txt
     build_job:
         needs: setup_job
         runs-on: windows-latest
         steps:
             - name: display hello
               run: echo hello
+            - uses: action/download-artifact@v4
+              with:
+                path: github-action.txt  
             - name: Display github-action.txt
               run: cat githun-aactiiom.txt
     deploy_job:
